@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 
 $csflags = "-debug -v -warnaserror";
 
-function compile($cmd) {
+function compile($cmd): string {
     echo $cmd;
     echo "\n";
     execute(20, "$cmd", "", $stdout, $stderr);
@@ -28,7 +28,7 @@ function compile($cmd) {
     return "false";
 }
 
-function compile_test($files,$code='') {
+function compile_test($files,$code=''):string {
     global $csflags;
     if (!empty($code)) {
         file_put_contents("test.cpp", $code);
@@ -44,7 +44,7 @@ function compile_test($files,$code='') {
     return "false";
 }
 
-function execution_test($files,&$output, $input='') {
+function execution_test($files,&$output, $input=''):string {
     echo "Execution Test";
     echo "\n";
     global $csflags;
@@ -55,7 +55,7 @@ function execution_test($files,&$output, $input='') {
     $output = "";
     echo $output ;
     execute(20,"mono test_program.exe",$input,$output,$stderr);
-    echo "After Execution";
+    echo "After Execution\n";
     echo $output;
 
     //TODO -- need a way to show what didn't work (especially when it seg faults)
@@ -68,8 +68,8 @@ function execution_test($files,&$output, $input='') {
     return "true";
 }
 
-function output_contains_lines(string $output,string $needle):bool {
-    if (empty($needle)) return true;
+function output_contains_lines(string $output,string $needle):string {
+    if (empty($needle)) return "true";
     // allow heredocs and so forth to be authored on any platform
     $needle = trim(str_replace("\r","\n",str_replace("\r\n","\n",$needle)));
     // allow heredocs and so forth to be authored on any platform
@@ -147,5 +147,9 @@ echo "\n";
 echo execution_test("../P1CSharpPrograms/HelloWorld/Program.cs", $testOutput);
 echo "\n";
 echo output_contains_lines($testOutput, "Hello, World!");
+echo "\n";
+echo execution_test("../P1CSharpPrograms/AddTwoIntegers/Program.cs -out:test_program.exe", $testOutput, "1\n2\n");
+echo "\n";
+echo output_contains_lines($testOutput, "This program adds two numbers.\n1st number? 1\n2nd number? 2\nThe total is 3.\n");
 // mcs -debug -v -warnaserror /home/jmarsden/CSharpTesting/HelloWorld/Program.cs -out:test_program.exe
 ?>
