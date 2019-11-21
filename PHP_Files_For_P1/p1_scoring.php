@@ -21,6 +21,7 @@ function compile($cmd) {
         $output = "stderr: \n $stderr\nstdout: $stdout";
 
     if ($stderr != '')
+        echo "True\n";
         return "true";
 
     echo "$output\n";
