@@ -5,7 +5,10 @@ error_reporting(E_ALL);
 $csflags = "-debug -v -warnaserror";
 
 function compile($cmd) {
+    echo $cmd;
     execute(20, "$cmd", "", $stdout, $stderr);
+    echo $stdout;
+    echo $stderr;
     if ($stderr == "")
         $output = $stdout;
     else if ($stdout == "")
