@@ -133,8 +133,8 @@ function execute($limit,$program,$stdin,&$stdout,&$stderr) {
     return true;
 }
 
-echo compile("mcs $csflags /home/jmarsden/CSharpTesting/HelloWorld/Program.cs -out:test_program.exe");
-echo execution_test("/home/jmarsden/CSharpTesting/HelloWorld/Program.cs", $testOutput);
+echo compile("mcs $csflags ../P1CSharpPrograms/HelloWorld/Program.cs -out:test_program.exe");
+echo execution_test("../P1CSharpPrograms/HelloWorld/Program.cs", $testOutput);
 echo output_contains_lines($testOutput, "Hello, World!");
 // mcs -debug -v -warnaserror /home/jmarsden/CSharpTesting/HelloWorld/Program.cs -out:test_program.exe
 ?>
