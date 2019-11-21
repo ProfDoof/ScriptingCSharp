@@ -1,7 +1,0 @@
-Stuff that really should be done to this repo:
-
-- refactor auto_score.php by using ../../unit_tests.php (see s1)
-- refactor auto_score.php, including removing unused bits for clarity
-
-- some problems were hidden (named with initial underscore) due to missing/incomplete scoring (or other issues)
-

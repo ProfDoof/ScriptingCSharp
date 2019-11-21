@@ -1,7 +1,0 @@
-[curriculum]
-name="ACU CS230 Object-Oriented Programming (OOP)"
-institutions[]=acu
-
-[default]
-html=problem.html
-score="php score.php"
