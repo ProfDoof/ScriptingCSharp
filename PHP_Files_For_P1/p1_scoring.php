@@ -6,9 +6,13 @@ $csflags = "-debug -v -warnaserror";
 
 function compile($cmd) {
     echo $cmd;
+    echo "\n";
     execute(20, "$cmd", "", $stdout, $stderr);
+    echo "\n";
     echo $stdout;
+    echo "\n";
     echo $stderr;
+    echo "\n";
     if ($stderr == "")
         $output = $stdout;
     else if ($stdout == "")
@@ -41,6 +45,7 @@ function compile_test($files,$code='') {
 
 function execution_test($files,&$output, $input='') {
     echo "Execution Test";
+    echo "\n";
     global $csflags;
 
     if (compile("mcs $csflags $files -out:test_program.exe") == "false")
@@ -137,7 +142,9 @@ function execute($limit,$program,$stdin,&$stdout,&$stderr) {
 }
 
 echo compile("mcs $csflags ../P1CSharpPrograms/HelloWorld/Program.cs -out:test_program.exe");
+echo "\n";
 echo execution_test("../P1CSharpPrograms/HelloWorld/Program.cs", $testOutput);
+echo "\n";
 echo output_contains_lines($testOutput, "Hello, World!");
 // mcs -debug -v -warnaserror /home/jmarsden/CSharpTesting/HelloWorld/Program.cs -out:test_program.exe
 ?>
