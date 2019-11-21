@@ -1,0 +1,11 @@
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AfterTheDecimal/bin/Debug/netcoreapp3.0/AfterTheDecimal
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AfterTheDecimal/bin/Debug/netcoreapp3.0/AfterTheDecimal.deps.json
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AfterTheDecimal/bin/Debug/netcoreapp3.0/AfterTheDecimal.runtimeconfig.json
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AfterTheDecimal/bin/Debug/netcoreapp3.0/AfterTheDecimal.runtimeconfig.dev.json
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AfterTheDecimal/bin/Debug/netcoreapp3.0/AfterTheDecimal.dll
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AfterTheDecimal/bin/Debug/netcoreapp3.0/AfterTheDecimal.pdb
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AfterTheDecimal/obj/Debug/netcoreapp3.0/AfterTheDecimal.csprojAssemblyReference.cache
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AfterTheDecimal/obj/Debug/netcoreapp3.0/AfterTheDecimal.AssemblyInfoInputs.cache
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AfterTheDecimal/obj/Debug/netcoreapp3.0/AfterTheDecimal.AssemblyInfo.cs
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AfterTheDecimal/obj/Debug/netcoreapp3.0/AfterTheDecimal.dll
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AfterTheDecimal/obj/Debug/netcoreapp3.0/AfterTheDecimal.pdb

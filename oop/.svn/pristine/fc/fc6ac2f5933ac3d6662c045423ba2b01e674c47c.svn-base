@@ -1,0 +1,13 @@
+[manifest:default]
+name="Tuples"
+upload[]=Header
+available[]=../auto_score.php
+available[]=../new.cpp
+available[]=score.php
+available[]=sample.cpp
+max-attempts=3
+attempts-window=60
+
+[verify-score]
+correct/Tuple.h = 1.0
+; TODO -- other error checking

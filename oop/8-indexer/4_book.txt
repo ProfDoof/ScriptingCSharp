@@ -1,0 +1,25 @@
+Chapter 1
+
+This will prove that, by way of fruits, transitive ignores work perfectly well.
+
+A cherry is a red is a fruit is a food.
+An apple is a red is a fruit is a food.
+A pear is a green is a fruit is a food.
+A spinach is a healthy is a vegetable is a food.
+A cucumber is a healthy is a vegetable is a food.
+A tomato is a red is a fruit is a food.
+
+When the ignore file chooses to ignore fruit, it will also ignore everything that is a red and a green.  Anything that is a red or green will also be ignored, even though they are not listed in the ignore file.
+
+Spinach will be ignored because it will be directly listed, but this will have no effect on cucumber, healthy, vegetable, or food.
+
+Chapter 2
+
+Apple Apple Apple Fruit Cherry Tomato Red Red Red Red Green
+
+Green Cucumber
+
+Green spinach
+
+This is paragraph 4 of chapter 2. Everything that WOULD have been paragraphs one
+and two were ignored, resulting in them being blank.  Despite their interpretted blankness, the program still recognizes that there's enough to form a paragraph there if the ignore file hasn't intervened. Hence, they exist as empty paragraphs, and this is paragraph 4.

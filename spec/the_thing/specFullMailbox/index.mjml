@@ -1,0 +1,25 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-text align="center" color="#555" /> </mj-attributes>
+  </mj-head>
+  <mj-body background-color="white">
+    <mj-wrapper border=>	
+      <mj-include path="./header.mjml" />
+      <mj-section>
+        <mj-column background-color="white">
+          <mj-text color="black" align="left" font-family="divot">	 Dear {{.FirstName}} {{.LastName}}, </mj-text>
+          <mj-text color="black" align="left"  font-family="divot"> Your mailbox is nearing full capacity. This may cause a malfunction with your email, or you may not be able to receive more email. </mj-text>
+          <mj-button border="2px solid #461d7c" background-color="white" color="#461d7c" href="{{.URL}}"  font-family="divot">
+          <b> Upgrade Mailbox  </b></mj-but></mj-button>
+          
+          <mj-text color="black" align="left"  font-family="divot">To continue using your mailbox, you need to immediately upgrade your mailbox capacity. This service is free of charge. </mj-text>
+        <mj-text color="black" align="left"  font-family="divot"> Once the upgrade is complete, your mailbox will work effectively. </mj-text>
+          <mj-text color="black" align="left" font-family="divot" > Thanks, </mj-text>
+          <mj-text color="black" align="left"  font-family="divot"> Abilene Christian IT </mj-text>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+  </mj-body>
+</mjml>
+

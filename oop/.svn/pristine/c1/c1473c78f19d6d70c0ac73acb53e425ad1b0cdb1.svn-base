@@ -1,0 +1,19 @@
+[manifest:default]
+name="Integer Stack" 
+upload[]=Header
+upload[]=Code
+available[]=../auto_score.php
+available[]=../new.cpp
+available[]=score.php
+available[]=skeleton.cpp
+max-attempts=3
+attempts-window=120
+
+[verify-score]
+compile_error/IntegerStack.h,compile_error/IntegerStack.cpp=0.05
+include_error/IntegerStack.h,include_error/IntegerStack.cpp=0
+memory_leak/IntegerStack.h,memory_leak/IntegerStack.cpp=0.20
+correct/IntegerStack.h,correct/IntegerStack.cpp=1.0
+not_const/IntegerStack.h,not_const/IntegerStack.cpp=1.0
+
+; TODO -- add not const test

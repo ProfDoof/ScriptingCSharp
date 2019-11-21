@@ -1,0 +1,11 @@
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AreaOfATriangle/obj/Debug/netcoreapp3.0/AreaOfATriangle.csprojAssemblyReference.cache
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AreaOfATriangle/obj/Debug/netcoreapp3.0/AreaOfATriangle.AssemblyInfoInputs.cache
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AreaOfATriangle/obj/Debug/netcoreapp3.0/AreaOfATriangle.AssemblyInfo.cs
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AreaOfATriangle/bin/Debug/netcoreapp3.0/AreaOfATriangle
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AreaOfATriangle/bin/Debug/netcoreapp3.0/AreaOfATriangle.deps.json
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AreaOfATriangle/bin/Debug/netcoreapp3.0/AreaOfATriangle.runtimeconfig.json
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AreaOfATriangle/bin/Debug/netcoreapp3.0/AreaOfATriangle.runtimeconfig.dev.json
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AreaOfATriangle/bin/Debug/netcoreapp3.0/AreaOfATriangle.dll
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AreaOfATriangle/bin/Debug/netcoreapp3.0/AreaOfATriangle.pdb
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AreaOfATriangle/obj/Debug/netcoreapp3.0/AreaOfATriangle.dll
+/home/johnmarsden/PratherTA/P1CSharpPrograms/AreaOfATriangle/obj/Debug/netcoreapp3.0/AreaOfATriangle.pdb

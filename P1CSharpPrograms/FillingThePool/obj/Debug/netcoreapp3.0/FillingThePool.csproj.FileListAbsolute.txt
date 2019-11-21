@@ -1,0 +1,11 @@
+/home/johnmarsden/PratherTA/P1CSharpPrograms/FillingThePool/obj/Debug/netcoreapp3.0/FillingThePool.csprojAssemblyReference.cache
+/home/johnmarsden/PratherTA/P1CSharpPrograms/FillingThePool/obj/Debug/netcoreapp3.0/FillingThePool.AssemblyInfoInputs.cache
+/home/johnmarsden/PratherTA/P1CSharpPrograms/FillingThePool/obj/Debug/netcoreapp3.0/FillingThePool.AssemblyInfo.cs
+/home/johnmarsden/PratherTA/P1CSharpPrograms/FillingThePool/bin/Debug/netcoreapp3.0/FillingThePool
+/home/johnmarsden/PratherTA/P1CSharpPrograms/FillingThePool/bin/Debug/netcoreapp3.0/FillingThePool.deps.json
+/home/johnmarsden/PratherTA/P1CSharpPrograms/FillingThePool/bin/Debug/netcoreapp3.0/FillingThePool.runtimeconfig.json
+/home/johnmarsden/PratherTA/P1CSharpPrograms/FillingThePool/bin/Debug/netcoreapp3.0/FillingThePool.runtimeconfig.dev.json
+/home/johnmarsden/PratherTA/P1CSharpPrograms/FillingThePool/bin/Debug/netcoreapp3.0/FillingThePool.dll
+/home/johnmarsden/PratherTA/P1CSharpPrograms/FillingThePool/bin/Debug/netcoreapp3.0/FillingThePool.pdb
+/home/johnmarsden/PratherTA/P1CSharpPrograms/FillingThePool/obj/Debug/netcoreapp3.0/FillingThePool.dll
+/home/johnmarsden/PratherTA/P1CSharpPrograms/FillingThePool/obj/Debug/netcoreapp3.0/FillingThePool.pdb

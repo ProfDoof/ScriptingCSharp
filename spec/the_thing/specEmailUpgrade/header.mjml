@@ -1,0 +1,8 @@
+<mj-section background-color="#ffffff" padding="4px">
+
+  <mj-column>
+    <mj-image width="150px" src="https://raw.githubusercontent.com/acusigchi/trainingSite/master/header.png">
+    </mj-image>
+  </mj-column>
+
+</mj-section>

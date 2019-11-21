@@ -1,0 +1,29 @@
+<p>Create a function, <tt>Combinations(int n, int k)</tt> to calculate the 
+number of ways to select k items from n items, commonly spoken as "n choose k". </p>
+
+<p><img src=pascal-triangle.gif align=right hspace=20 \>The value of "n choose k" can be 
+determined by using <a href=http://en.wikipedia.org/wiki/Pascal%27s_triangle>
+Pascal's Triangle</a>, where n is the row, beginning with 0, and k is the position
+in the row, beginning with 0 and ending at k. For example, "4 choose 2" is 6, 
+since item number 2 (the third one) on row number 4 (the bottom row) is 6.</p>
+
+<p>The values of Pascal's Triangle can ge determined recursively as shown in 
+the animating image on the right. Each item is either a base case (1), or the 
+sum of two numbers on the previous row.</p>
+
+<br clear=both>
+
+<p>Running your program should look like this:</p>
+
+<pre class=cmd>
+Enter an Integer: <span class=input>6</span>
+Enter another Integer: <span class=input>2</span>
+Combinations(6,2) = 15
+</pre>
+
+<pre class=cmd>
+Enter an Integer: <span class=input>8</span>
+Enter another Integer: <span class=input>4</span>
+Combinations(8,4) = 70
+</pre>
+

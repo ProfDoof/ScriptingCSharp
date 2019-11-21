@@ -1,0 +1,780 @@
+# Athene Error Case Markup File - built 2015-11-18 14:49:50
+# Markup file: catalog/comparison/assign-used-as-truth-value/markup.txt
+<err "suggest parentheses around assignment used as truth value" substr>
+    "It seems that you used the assignment operator in a conditional statement. Remember: "
+    "operator = (one equals sign) assigns one value to a variable"
+    "operator == (two equals signs) compares two values and returns either true or false (e.g. a==3; checks to see if a is equal to 3 and returns a bool value of true or false)"
+</err>
+
+# Markup file: catalog/comparison/signed-unsigned/markup.txt
+<err "comparison between signed and unsigned integer expressions" substr>
+	"Integer types may be unsigned or signed. It is risky to compare an unsigned integer with a signed integer. You may want to type-cast the unsigned integer back to a signed integer by using the '(int)' cast."
+</err>
+
+# Markup file: catalog/comparison/suggest-parens/markup.txt
+<err "suggest parentheses around %1 within %2",
+     "suggest parentheses around comparison in operand of %1" substr>
+        <output>
+		"It seems that you have used the logical operators &&(AND) and ||(OR) in a compound "
+		"expression with another logical or comparison operator. While the logical operators "
+		"have a defined precedence (AND is evaluated before OR), the compiler is warning you "
+		"that you may not be doing what you think you are doing. Try using parentheses to "
+		"explicitly state your intentions to improve readibility, like so:"
+		<bullet>
+			"A || B && C becomes A || (B && C)"
+			"A && B || C && D || E && F becomes (A && B) || (C && D) || (E && F)"
+		</bullet>
+        </output>
+	<cond-output bullet>
+		<vtok %1 "&"/>
+		<vtok %1 "|"/>
+		<output>
+			"Caution! It seems that you are using the wrong logical operator. "
+			"Note that "%1" is the bitwise-"
+			<cond-output>
+				<vtok %1 "&"/>
+				"AND"
+			</cond-output>
+			<cond-output>
+				<vtok %1 "|"/>
+				"OR"
+			</cond-output>
+			" operator, not a logical operator. Try using "
+			<cond-output>
+				<vtok %1 "&"/>
+				"&&"
+			</cond-output>
+			<cond-output>
+				<vtok %1 "|"/>
+				"||"
+			</cond-output>
+			" instead."
+		</output>
+	</cond-output>
+</err>
+
+# Markup file: catalog/conditional/return-within-conditional/markup.txt
+<err "control reaches end of non-void function" substr>
+	"It seems that you have a function where the control (the execution of the program) "
+	"reaches the end of the function with no return statement. In this case, your function is "
+	"non-void, meaning data of the function's return type is expected to be returned. There "
+	"are two main causes for this problem."
+	<output block>
+		"You could simply have forgotten to include a return statement, such as in the "
+		"example below:"
+<code block>
+"int add(int a,int b)
+{
+	int result = a+b;
+	// no return statement here...
+}
+int main()
+{
+	int n = add(1,2); // ouch! no return in function 'add'
+}"
+</code>
+		"You always need to specify a return value. Some compilers may accept code like "
+		"the above, but it can lead to undefined behavior at runtime, which is why the "
+		"compiler that graded your submission complained."
+	</output>
+	<output block>
+		"You could also have a function that does not return on all code paths, meaning that "
+		"your function returns based on some condition but not under all conditions. Also note "
+		"that most compilers (such as the one grading your submission) are not smart enough to "
+		"understand logically when the control will indeed always return. Take the following for "
+		"example:"
+<code block>
+"int fac(int n)
+{
+	if (n <= 0)
+		return 1;
+	else if (n > 0) // in other words, \"else\"
+		return n * fac(n-1);
+	// compiler thinks control could potentially reach here
+}"
+</code>
+	"In the preceding example, the control logically will never reach the end of function "
+	"because the conditions satisfy all possible code paths. However, the compiler does not "
+	"understand this fact; it is wise (and perhaps a better design) to rewrite the "
+	"function to prevent this, such as:"
+<code block>
+"int fac(int n)
+{
+	if (n > 0)
+		return n * fac(n-1);
+
+	// improvement:
+	// let the control \"reach the bottom\"
+	return 1;
+}"
+</code>
+	</output>
+</err>
+
+# Markup file: catalog/convert/cannot-convert-args/markup.txt
+<err "cannot convert %1 to %2 for argument %3 to %4">
+	"It seems that you mismatched the type for argument "%3" passed to a function that looks "
+	"like: "<code>%4</code>
+	<bullet>
+		<output> "You are trying to convert \""<simpltype %1/>"\" to \""<simpltype %2/>"\"." </output>
+		<cond-output negate>
+			<vtok %1 "*" substr/>
+			<cond-output>
+				<vtok %2 "*" substr/>
+				"You are trying to pass a single value when an array is expected. "
+				"Make sure you are passing the entire array, not a single element from it."
+			</cond-output>
+			<else>
+				<cond-output all>
+					<vtok %1 "*" substr/>
+					<vtok %2 "*" substr/>
+					"You are trying to pass an array of the wrong type to "
+					"the function, which expects an array type."
+				</cond-output>
+			</else>
+		</cond-output>
+		<cond-output all>
+			<cond>
+				<vtok %1 "std::string" substr/>
+				<vtok %1 "std::basic_string" substr/>
+				<vtok %1 "const char*"/>
+				<vtok %1 "const char [" substr/>
+			</cond>
+			<vtok %2 "int"/>
+			"You are trying to convert a string to an integer, for which there is no "
+			"default conversion. To do this, use a standard stringstream:"
+<code block>
+"// C++ method
+#include <sstream>
+using namespace std;
+
+int from_string_to_int(const string& s)
+{
+        int result;
+        stringstream converter(s); // assign specified value as input for stream
+        converter >> result; // read off next integer into 'result'
+        return result;
+}"
+</code>
+		</cond-output>
+	</bullet>
+</err>
+
+# Markup file: catalog/convert/cannot-convert-assignment/markup.txt
+<err "cannot convert %1 to %2 in assignment">
+	"It seems that you are trying to assign a value of type '"<simpltype %1/>"' to a variable "
+	"that requires a value of type '"<simpltype %2/>"'. "
+	<cond-output all>
+                <cond>
+                        <vtok %1 "std::string" substr/>
+                        <vtok %1 "std::basic_string" substr/>
+                        <vtok %1 "const char*"/>
+                        <vtok %1 "const char[" substr/>
+                </cond>
+		<cond>
+			<vtok %2 "int"/>
+			<vtok %2 "double"/>
+		</cond>
+		"You are trying to convert a string type to "%2". There is no such "
+		"implicit conversion. To do this, you can use a stringstream "
+		"from the C++ standard library:"
+<code>
+"#include <sstream>
+using namespace std;
+
+"%2" from_string_to_"%2"(const string& s)
+{
+	"%2" result;
+	stringstream ss(s); // assign the specified string value as the stream's input
+	ss >> result; // read the next integer off the stream into 'result'
+	return result;
+}"
+</code>
+	</cond-output>
+</err>
+
+# Markup file: catalog/convert/cannot-convert-init/markup.txt
+<err "cannot convert %1 to %2 in initialization">
+	"It seems you are trying to initialize a variable or argument to a function of type '"
+	<simpltype %2/>"' with a value of type '"<simpltype %1/>"'. "
+	<cond-output all>
+                <cond>
+                        <vtok %1 "std::string" substr/>
+                        <vtok %1 "std::basic_string" substr/>
+                        <vtok %1 "const char*"/>
+                        <vtok %1 "const char[" substr/>
+                </cond>
+		<vtok %2 "int"/>
+		"You are attempting to initialize an integer with a string value. There is no "
+		"default conversion from string to int. To do this use a standard stringstream:"
+<code block>
+"// C++ method
+#include <stringstream>
+using namespace std;
+
+int from_string_to_int(const string& s)
+{
+        int result;
+        stringstream converter(s); // assign specified value as input for stream
+        converter >> result; // read next integer off stream into 'result'
+        return result;
+}"
+</code>
+	<else>
+		<cond-output>
+			<vtok %1 "std::basic_istream" substr/>
+			"It appears that you are trying to assign 'cin' to a variable "
+			"in an initialization statement."
+		<else>
+			<cond-output>
+				<vtok %1 "std::basic_ostream" substr/>
+				"It appears that you are trying to assign 'cout' to a variable "
+				"in an initialization statement."
+			</cond-output>
+		</else>
+		</cond-output>
+	</else>
+	</cond-output>
+</err>
+
+# Markup file: catalog/convert/cannot-convert-return/markup.txt
+<err "cannot convert %1 to %2 in return">
+	"It seems that you are trying to return data that doesn't match the function return type "
+	"or that cannot be converted to the function return type. In this case, it appears that you "
+	"are attempting to convert from \""<simpltype %1/>"\" to \""<simpltype %2/>"\". "
+	<cond-output all>
+		<cond>
+			<vtok %1 "std::string" substr/>
+			<vtok %1 "std::basic_string" substr/>
+			<vtok %1 "const char*"/>
+			<vtok %1 "const char[" substr/>
+		</cond>
+		<vtok %2 "int"/>
+		"You are trying to return a string when an integer value is expected. There is no"
+		" default conversion from string to int. To do this, use a standard stringstream:"
+<code block>
+"// C++ method
+#include <stringstream>
+using namespace std;
+
+int from_string_to_int(const string& s)
+{
+	int result;
+	stringstream converter(s); // assign specified string value as input for the stream
+	converter >> result; // read the next integer off the stream into 'result'
+	return result;
+}"
+</code>
+		<else>
+			<cond-output>
+				<vtok %1 "std::basic_ostream" substr/>
+				"You are attempting to return 'cout' (or some other output stream)."
+				<else>
+					<cond-output>
+						<vtok %1 "*" substr/>
+						<cond-output negate>
+							<vtok %2 "*" substr/>
+							"You are attempting to return an array when only a single "
+							"value is expected."
+							<else>
+								"You are attempting to return an array of either the wrong "
+								"type or number of bounds."
+							</else>
+						</cond-output>
+					</cond-output>
+				</else>
+			</cond-output>
+		</else>
+	</cond-output>
+</err>
+
+# Markup file: catalog/convert/could-not-convert/markup.txt
+<err "could not convert %1 to %2">
+	"It seems that the compiler cannot convert the value of an operand to an expected type, "
+	"in this case, '"<simpltype %2/>"'. The variable, operation, or expression that it cannot "
+	"convert is:"
+	<bullet>
+		<output>"\""%1"\""</output>
+	</bullet>
+        <cond-output all>
+                <vtok %1 "::operator=" substr/>
+                <vtok %2 "bool"/>
+                "Be careful: you may be trying to compare two operands but instead "
+                "used the assignment operator. Remember: "
+                <bullet>"'operator=' is assignment" "'operator==' is comparison."</bullet>
+        </cond-output>
+</err>
+<err "could not convert %1 from %2 to %3">
+	"It seems that the compiler cannot convert the value of an operand of type '"<simpltype %2/>
+	"' to the expected type '"<simpltype %3/>"'. The variable, operation, or expression that "
+	"it cannot convert is:"
+	<bullet>
+		<output>"\""%1"\""</output>
+	</bullet>
+        <cond-output all>
+                <vtok %1 "::operator=" substr/>
+                <vtok %3 "bool"/>
+		"Be careful: you may be trying to compare two operands but instead "
+		"used the assignment operator."
+		<bullet>"Remember that 'operator=' is assignment and 'operator==' is comparison."</bullet>
+        </cond-output>
+</err>
+
+# Markup file: catalog/convert/invalid-conversion/markup.txt
+<err "invalid conversion from %1 to %2" substr>
+	"It seems that you are trying to perform an incorrect conversion, in this case "
+	"from "<simpltype %1/>" to "<simpltype %2/>". "
+	<cond-output all>
+		<vtok %1 "int"/>
+		<cond>
+			<vtok %2 "std::string" substr/>
+			<vtok %2 "std::basic_string" substr/>
+			<vtok %2 "char*" substr/>
+			<vtok %2 "char[" substr/>
+		</cond>
+		"You appear to be attempting to convert an integer to a string type. There is no "
+		"such implicit (default) conversion. You need to use the stringstream faculty of "
+		"the C++ standard library in order to perform the conversion like so:"
+<code block>
+"#include <sstream>
+using namespace std;
+
+string from_int_to_string(int i)
+{
+	stringstream ss;
+	ss << i; // insert integer into stream
+	return ss.str(); // get contents of string stream
+}"
+</code>
+	<else>
+		<cond-output all>
+			<cond>
+				<vtok %1 "std::string" substr/>
+				<vtok %1 "std::basic_string" substr/>
+				<vtok %1 "char*" substr/>
+				<vtok %1 "char[" substr/>
+			</cond>
+			<vtok %2 "int"/>
+			"You appear to be attempting to convert a string type to an integer. There is no "
+			"such implicit (default) conversion. You need to use the stringstream faculty of "
+			"the C++ standard library in order to perform the conversion like so:"
+<code block>
+"#include <sstream>
+using namespace std;
+
+int from_string_to_int(const string& s)
+{
+	int result;
+	stringstream ss(s); // create stringstream using specified value
+	ss >> result; // let the stream read the converted integer into 'result'
+	return result;
+}"
+</code>
+		<else>
+			<cond-output all>
+				<cond negate> <vtok %1 "*" substr/> </cond>
+				<vtok %2 "*" substr/>
+				"You appear to be attempting to convert a single value to an array type. "
+				"Check the data type of the variables/values you're using at the given line."
+			<else>
+				<cond-output all>
+					<vtok %1 "*" substr/>
+					<cond negate> <vtok %2 "*" substr/> </cond>
+					"You appear to be attempting to convert an array to a single value. "
+					"Check the data type of the variables/values you're using at the given line. "
+					"You may need to index the array using the subscripting operators (square brackets [])."
+				</cond-output>
+			</else>
+			</cond-output>
+		</else>
+		</cond-output>
+	</else>
+	</cond-output>
+</err>
+
+# Markup file: catalog/declaration/incomplete-type/markup.txt
+<err "variable %1 has initializer but incomplete type">
+     <cond-output>
+        <vtok %1 "stringstream" substr/>
+        "You need to #include <sstream>."
+     </cond-output>
+</err>
+
+# Markup file: catalog/declaration/not-declared/markup.txt
+<err "%1 was not declared in this scope">
+        "It seems that you used a variable or function named '"%1"' that you did not properly define before using. "
+        "Go back through your code, check your spelling, and make sure you defined your variable or function before you called it. "
+        <cond-output bullet>
+          <decl any distance:4> %1 </decl>
+          <output>
+            "Note: on line " %lineno " there is a " %decltype " declaration '" %decl
+            "' similar to " %1
+          </output>
+        </cond-output>
+        <cond-output>
+        	<vtok %1 icase "cout"/>
+	          "Be sure you have included '#include <iostream>' at the top of the file. After the #include directive, make sure you have included 'using namespace std'. This will bring names like 'cout' into the scope of the file."
+	        <else>
+		        <cond-output>
+		          
+		          <vtok %1 icase "cerr"/>
+		          <vtok %1 icase "cin"/>
+		          <vtok %1 icase "string"/>
+			      <vtok %1 icase "setprecision"/>
+		          <vtok %1 icase "setw"/>
+		          <cond-output negate>
+		            <vtok %1 "cout"/>
+		            <vtok %1 "cerr"/>
+		            <vtok %1 "cin"/>
+		            <vtok %1 "string"/>
+			        <vtok %1 "setprecision"/>
+		            <vtok %1 "setw"/>
+		            "You may be attempting to use "
+		            <tolower %1/>
+		            " from the C++ Standard Library. Remember that C++ is case-sensitive."
+		          </cond-output>
+			  <output>
+		          	"'"%1"'"
+			  	<cond-output>
+					<vtok %1 "setprecision"/>
+		            <vtok %1 "setw"/>
+					" is included in the 'iomanip' header. Make sure you have '#include <iomanip>' and 'using namespace std;' at the top of your source file. This will make sure '"%1"' is in scope for you to use in your code."
+					<else> "<iostream>" </else>
+				</cond-output>
+			  </output>
+		        </cond-output>
+		        <cond-output bullet>
+		          <vtok %1 icase "char"/>
+		          <vtok %1 icase "short"/>
+		          <vtok %1 icase "int"/>
+		          <vtok %1 icase "long"/>
+		          <vtok %1 icase "float"/>
+		          <vtok %1 icase "double"/>
+		          <output>
+		            "You may be attempting to use the type '"
+		            <tolower %1/>
+		            "'. Remember that C++ is case-sensitive."
+		          </output>
+		        </cond-output>
+		    </else>
+	    </cond-output>
+</err>
+
+# Markup file: catalog/declaration/redeclaration/markup.txt
+<err "redeclaration of %1">
+	"It seems that you declared another variable of the same name in the same scope called "
+	%1". Remember:"
+	<bullet>
+		<output>
+			"A specific variable name can only be used once in a specific scope"
+			" (function). For example, the following is incorrect:"
+<code block>
+"int main()
+{
+	int input;
+	cin >> input;
+	int input; // error - redeclaration
+	cin >> input; // which 'input'?
+}"
+</code>
+		</output>
+	</bullet>
+</err>
+
+# Markup file: catalog/declaration/shadows-global-declaration/markup.txt
+<err "declaration of %1 shadows a global declaration" substr>
+    "It seems you are attempting to create a variable with the same name as a global variable. "
+    "This means the new variable will 'shadow' the old variable. Variable shadowing occurs when "
+    "you declare a variable in an inner scope (e.g. a function) that uses the same name as a "
+    "variable in an outer scope (e.g. the global scope). For example:"
+<code block lineno>
+"string command;
+int main()
+{
+	while (true)
+	{
+		cin >> command;
+		if (command == \"quit\")
+			break;
+		else
+		{
+			string command; // inner declaration shadows the global on line 1
+			cin >> command; // which 'command' do we want here?
+			// ...
+		}
+	}
+}"
+</code>
+    "Variable shadowing is syntactically and semantically correct but often indicates a design flaw "
+    "in the program. The compiler is issuing this as a warning that is being treated as an error, which "
+    "is why it may have worked when you tested your program locally but not when you submitted it. "
+    "The language will always use the shadowing variable (the one with the inner-most scope)."
+</err>
+
+# Markup file: catalog/declaration/shadows-previous-local/markup.txt
+<err "declaration of %1 shadows a previous local" substr>
+	"It seems that you are attempting to declare a variable called "%1" that shadows another "
+	"variable that you have already declared. 'Variable shadowing' refers to a situation were "
+	"you declare a variable in an 'inner' scope that uses the same name of a variable in an "
+	"'outer' scope. For example:"
+<code block lineno>
+"int main()
+{
+	while (true)
+	{
+		string command;
+		cin >> command;
+		if (command == \"quit\")
+			break;
+		else
+		{
+			string command; // inner declaration shadows previous local on line 5
+			cin >> command; // which 'command'?
+			// ...
+		}
+	}
+}"
+</code>
+    "Variable shadowing is syntactically and semantically correct but often indicates a design flaw "
+    "in the program. The compiler is issuing this as a warning that is being treated as an error, which "
+    "is why it may have worked when you tested your program locally but not when you submitted it. "
+    "The language will always use the shadowing variable (the one with the inner-most scope)."
+</err>
+
+# Markup file: catalog/misc/missing-return-st/markup.txt
+<err "no return statement in function returning non-void" substr>
+	"Your submission contains a function that is missing a return statement. Either change the return type to void or return a value of your function's type."
+</err>
+
+# Markup file: catalog/misc/missing-terminating/markup.txt
+<err "missing terminating \" character">
+	"It seems that you forgot an ending double-quotation mark for a string. "
+	"Go back through your code and make sure every open quote has an end quote. "
+	"Note: most text editors will change the color of your code to differentiate between code and a text string. "
+	"You can use this to help identify where a string has not been closed where you expect it to be."
+</err>
+
+# Markup file: catalog/misc/resolve-address-of-overloaded-function/markup.txt
+<err "statement cannot resolve address of overloaded function">
+    "This error occurs when a function is used as a statement. It commonly is the result of "
+    "using 'endl' incorrectly. For example: "
+    <code>
+"int main()
+{
+    // incorrect
+    cout << "Hello, World!";
+    endl; // error!
+
+
+    // correct
+    cout << "Hello, World!"
+      << endl;
+}"
+    </code>
+</err>
+
+# Markup file: catalog/misc/unset-variable/markup.txt
+<err "%1 is used uninitialized in this function"
+     "%1 may be used uninitialized in this function" substr>
+     "It seems that you used a variable's value before it was set. Remember: A variable is not initialized by default, "
+     "and if you use an unset variable at run-time, it could contain any random value from the system (garbage value). This could lead to undefined behavior, which is why the compiler complains. "
+     "Make sure that you initialized the variable properly with a type."
+</err>
+
+# Markup file: catalog/misc/variable-array-length/markup.txt
+<err "ISO C++ forbids variable length array %1" substr>
+        "It seems that you are trying to create an array with a variable size argument. An array's "
+	"size must be a constant value that can be resolved at compile-time. For example: "
+	<code block>
+"void f()
+{
+	int array1[100]; // \"100\" is a constant value
+
+	const int MAX_ELEMS = 100;
+	int array2[MAX_ELEMS]; // \"MAX_ELEMS\" is a constant value
+
+	int maxElems = 100;
+	int array3[maxElems]; // error! \"maxElems\" is NOT a constant value
+}"
+	</code>
+</err>
+
+# Markup file: catalog/semantic/no-match-operand-types/markup.txt
+<err "no match for %1 (operand types are %2 and %3)">
+  <cond-output all>
+    <vtok %1 "operator<<"/>
+    <vtok %2 "istream" substr/>
+    "It seems that you are using the incorrect operator for input expressions involving 'cin'. "
+    "Remember that '>>' must be used with 'cin', not '<<'."
+    <else>
+      <cond-output all>
+        <vtok %1 "operator>>"/>
+        <vtok %2 "ostream" substr/>
+        "It seems that you are using the incorrect operator for output expressions involving "
+        "'cout'. Remember that '<<' must be used with 'cout', not '>>'."
+          <else>
+            <cond-output all>
+              <vtok %1 "operator<"/>
+              <vtok %2 "ostream" substr/>
+              "It seems that you are using the '<' (less than) operator instead of the '<<' "
+              "operator in an output expression."
+            </cond-output>
+          </else>
+      </cond-output>
+    </else>
+  </cond-output>
+</err>
+
+# Markup file: catalog/semantic/no-match/markup.txt
+<err "no match for %1 in %2">
+    <cond-output all>
+        <vtok %1 "operator<"/>
+        <vtok %2 "operator<<" substr/>
+        "It seems that you are attempting to use the < operator instead of the << operator in "
+        "an output expression."
+    </cond-output>
+</err>
+
+# Markup file: catalog/syntax/%1-without-previous-%2/markup.txt
+<err "%1 without a previous %2">
+	<cond-output>
+		<vtok %1 "else"/>
+		<vtok %2 "if"/>
+		"It seems that you have coded an " <code> "else" </code> " statement before an " <code> "if" </code>
+		" statement. Else statements can only follow if statements, because else statements are intended to handle all cases not convered by the if statement's conditional. "
+		"Either include the if statement before the else statement or change the else statement to an if statement. " 
+		"In C++, the proper syntax for if-statements looks something like this:"
+<code block>
+"if (emotion == 1) {
+	cout << \"Happy\";
+} else {
+	cout << \"Sad\";
+}"
+</code>
+	</cond-output>
+</err>
+
+# Markup file: catalog/syntax/expected-%1-at-end-of-input/markup.txt
+<err "expected %1 at end of input">
+    <cond-output>
+        <vtok "}" %1/>
+        "It seems that you forgot to terminate an open-brace with a closed-brace. "
+        "Check the following places:"
+        <output bullet>
+            <output>"function definitions like " <code>"int main() { /*...*/ }"</code></output>
+            <output>"conditions like " <code>"if (true) { /*...*/ }"</code></output>
+            <output>"iterative-conditions like " <code>"do { /*...*/ } while (true);"</code></output>
+        </output>
+    </cond-output>
+</err>
+
+# Markup file: catalog/syntax/expected-%1-before/markup.txt
+<err "expected %1 before %2" substr>
+    <cond-output>
+        <vtok %1 ")"/>
+        	<cond-output>
+        		<vtok %2 "!"/>
+        			"It seems that you forgot to enclose a 'for' statement or a conditional statement with parentheses. "
+        			"There may be one or both parentheses missing. (The statement should be enclosed like this: "
+        			<code> if (a==3) </code> ". ) "
+        			"Go back and check the line mentioned above."
+        		<else>
+        			"It seems that you forgot parenthesis around a \"for\" statement or a conditional. Go back and check the line mentioned above."
+        		</else>
+        	</cond-output>
+    </cond-output>
+    <cond-output>
+        <vtok %1 ";"/>
+    			"It seems that you forgot to close a statement with a semicolon. Remember that there must be a semicolon at the end of each statement, which in most cases is at the end of a line in your program. "
+    			"Go back and check that you have properly placed semicolons after each statement."
+    </cond-output>
+    <cond-output>
+        <vtok %1 "{"/>
+        	"It seems that you are not closing a statement before you are beginning a bracket '{'. Go check your code for unintentional continuation of statements, especially before the use of brackets."
+    </cond-output>
+</err>
+
+# Markup file: catalog/syntax/expected-initializer-before/markup.txt
+<err "expected initializer before %1 token">
+    <cond-output>
+        <vtok %1 "=="/>
+        "It seems that you have either not closed a statement before a conditional statement or you have not completed a conditional statement. "
+        "Remember that conditional statements require a variable both before and after the comparison operator. "
+        "Go back and check that all statements are closed properly and that the conditional statement is comparing two variables."
+    </cond-output>
+</err>
+
+# Markup file: catalog/syntax/incorrect-return-type/markup.txt
+<err "%1 must return %2">
+	<cond-output>
+		<vtok %1 "::main"/>
+		"Your main function has an incorrect return type."
+		<bullet>
+			"The main function must be of return type 'int'"
+			<output>
+				"Traditionally, the return value from the main function is used "
+				"as a status code used to determine the success of the program, however "
+				"you don't have to explicitly return a value from main."
+			</output>
+		</bullet>
+	</cond-output>
+</err>
+
+# Markup file: catalog/syntax/semicolon-after-if/markup.txt
+<err "suggest braces around empty body in an %1 statement" substr>
+	<cond-output>
+		<vtok %1 "if"/>
+		"It seems that you have placed a semicolon after the beginning of an if-statement. "
+		"We suggest that you remove the semicolon from the if-statement. "
+		"In C++, a statement is terminated by a semicolon. Therefore, if you place a "
+		"semicolon after " <code> "if(something);" </code> " would tell the compiler that "
+		"the if-statement does nothing. This isn't really a problem, however sometimes the "
+		"\"empty body\" (as the compiler calls it) can hide bugs, which is why the compiler "
+		"complains. To fix this issue, add a set of curly braces to denote a new code block "
+		"for the if-statement. Also, if you don't use the if-statement, you might as well remove it."
+		<output block>
+			"Example:"
+<code block>
+"// issue
+if (true)
+	; // empty body
+
+// solution
+if (true)
+{
+	// empty block
+}"
+</code>
+		</output>
+	</cond-output>
+</err>
+
+# Markup file: catalog/syntax/stray-symbol/markup.txt
+<err "stray %1 in program">
+	"It seems a stray symbol or sequence of symbols has been found in your source code. "
+	"This can be caused by numerous reasons. Some common ones include:"
+	<bullet>
+		<output>
+			"Submitting a non-plain text source code document. Remember: the source "
+			"code must be encoded using a plain-text encoding such as ASCII or UTF-8."
+		</output>
+		<output>
+			"Using an incorrect escape character in a string literal. Remember: an escape "
+			"character is always preceded by a backslash, such as \\\" for a double quote."
+		</output>
+	</bullet>
+</err>
+
+<err "statement has no effect">
+     "It seems like you have included a line that does not change any data or print anything out. This may be because you forgot to assign a value to a variable or need to add 'cout << ' to the beginning of the line to print the variable or data to the console."
+</err>
+
+<err "ISO C++ forbids declaration of %1 with no type">
+    "When creating a c++ file you must have a main function. Since main is a function, "
+    "it must have a type, such as int, declared. This is similar to how variables much be declared before they can be used. "
+    "Go back through your code and make sure that the funciton, main(), has the proper type before declaring it."
+</err>
+
+<err "left-hand operand of comma has no effect">
+     "It seems that you are trying to evaluate a conditional statement with the use of a comma. Use either && or || when combining conditional statements in C++. Go back and check that you are using either && or || and not a comma."
+</err>

@@ -1,0 +1,44 @@
+<p>The purpose of this assignment is to practice C++ class implementation of 
+simple value-types with overloaded operators, type management and input/output.</p>
+
+<p>Create a 2D point and vector class. A point represents an absolute position 
+in the 2D plane, using orthogonal units: x and y. A vector represents a 
+relative direction and distance in the 2D plane, using orthogonal delta units: 
+dx and dy.</p>
+
+<p>Addition (and subtraction) are defined for a pair of vectors giving a 
+vector, a vector and a point giving a point, but not for a pair of points 
+since they are both absolute locations. The difference of two points, a-b, is 
+a vector from b to a. A vector may be converted to a point automatically, 
+similar to automatic conversion of int to double. Equality is defined on both 
+types. Multiplication by a scalar is defined for vectors giving a new scaled 
+vector.</p>
+
+<p>Points are formatted as an ordered pair using parentheses: <tt>(2,3)</tt>. 
+Vectors are formatted as an order pair using braces: <tt>[2,3]</tt>. Both 
+input and output should be supported.</p>
+
+<p>The following code is a partial example of how your class will be tested.</p>      
+
+<pre class=file>
+Point&lt;int&gt; p(3,4),q(10,3);
+Vector&lt;int&gt; v(1,2),w(-1,-5);
+
+q = p + w - v;
+p += w;
+p -= w;
+
+w = v + w;
+v -= w;
+w = v*2;
+
+v = q - p;
+
+if (p == q) cout &lt;&lt; "p equals q\n";
+if (v != w) cout &lt;&lt; "v does not equal w\n";
+
+cout &lt;&lt; "p = " &lt;&lt; p &lt;&lt; endl;
+cout &lt;&lt; "q = " &lt;&lt; p &lt;&lt; endl;
+cout &lt;&lt; "v = " &lt;&lt; p &lt;&lt; endl;
+cout &lt;&lt; "w = " &lt;&lt; p &lt;&lt; endl;
+</pre>

@@ -1,0 +1,23 @@
+[manifest:default]
+name="Shapes"
+upload[]=Shapes.h
+upload[]=Shapes.cpp
+available[]=../oop_scoring.php
+available[]=../new.cpp
+available[]=score.php
+available[]=sample.cpp
+available[]=polymorphism.cpp
+ignore[]=rendering.cpp
+ignore[]=all.cpp
+
+[verify-score]
+compile_error/Shapes.h,compile_error/Shapes.cpp = .02
+declaration_error/Shapes.h,declaration_error/Shapes.cpp = .03
+interface_error/Shapes.h,interface_error/Shapes.cpp = .05
+const_error/Shapes.h,const_error/Shapes.cpp = 0.90
+sample_error/Shapes.h,sample_error/Shapes.cpp = .20
+correct/Shapes.h,correct/Shapes.cpp = 1.0
+no_filename_error/Shapes2.h,no_filename_error/Shapes2.cpp = 1.0
+math_error/Shapes.h,math_error/Shapes.cpp = .8
+
+; TODO -- need a check for Polygon storing pointer vs. copying points to its own memory

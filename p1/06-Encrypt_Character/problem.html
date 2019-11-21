@@ -1,0 +1,62 @@
+ 
+<p><a href="http://en.wikipedia.org/wiki/Cryptography" target="_blank">Cryptography</a> is the study of 
+hiding information or <a href="http://en.wikipedia.org/wiki/Encryption" target="_blank">encrypting</a> 
+information. Cryptographers often use things called 
+<a href="http://en.wikipedia.org/wiki/Cipher" target="_blank">ciphers</a> to encrypt messages. A cyclic 
+cipher is a common, but relatively insecure method of encrypting a message. It is achieved by replacing 
+every letter in the word or message with another letter in the alphabet a certain number of positions away. 
+For example, if the message to be encrypted (the plaintext) was IBM and the cipher key was -1, the resulting 
+message (the ciphertext) would be HAL. 'I' was replaced by the letter one position to the left of it in the 
+alphabet: 'H', etc.</p>
+
+<p>If the letter happens to be 'Y' and the key is 3, the cipher "wraps around" to the beginning of the 
+alphabet and the encrypted letter would be 'B'.</p>
+
+<p>Write a program to "encrypt" one character using a cyclic cipher.
+You may assume that the character is an alphabetic letter,
+but it may be given in lowercase or uppercase.
+The key to the encoding will be the number of characters to move "up" in the alphabet (toward Z);
+negative numbers move "down" in the alphabet (toward A). 
+You may assume that the key will be greater than -26 and less than 26
+(so we will never cycle the whole way through the alphabet).
+Output the encrypted character as a capital letter.
+</p>
+
+<p>Your program should run like the examples shown below.</p>
+
+<pre class=cmd>
+This program encrypts a single letter.
+
+Letter: <span class=input>a</span>
+Key: <span class=input>1</span>
+
+Result: B
+</pre>
+
+<pre class=cmd>
+This program encrypts a single letter.
+
+Letter: <span class=input>a</span>
+Key: <span class=input>-1</span>
+
+Result: Z
+</pre>
+
+<pre class=cmd>
+This program encrypts a single letter.
+
+Letter: <span class=input>f</span>
+Key: <span class=input>4</span>
+
+Result: J
+</pre>
+
+<pre class=cmd>
+This program encrypts a single letter.
+
+Letter: <span class=input>M</span>
+Key: <span class=input>6</span>
+
+Result: S
+</pre>
+

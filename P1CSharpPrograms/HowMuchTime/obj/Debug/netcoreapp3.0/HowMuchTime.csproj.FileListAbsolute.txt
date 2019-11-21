@@ -1,0 +1,11 @@
+/home/johnmarsden/PratherTA/P1CSharpPrograms/HowMuchTime/obj/Debug/netcoreapp3.0/HowMuchTime.csprojAssemblyReference.cache
+/home/johnmarsden/PratherTA/P1CSharpPrograms/HowMuchTime/obj/Debug/netcoreapp3.0/HowMuchTime.AssemblyInfoInputs.cache
+/home/johnmarsden/PratherTA/P1CSharpPrograms/HowMuchTime/obj/Debug/netcoreapp3.0/HowMuchTime.AssemblyInfo.cs
+/home/johnmarsden/PratherTA/P1CSharpPrograms/HowMuchTime/bin/Debug/netcoreapp3.0/HowMuchTime
+/home/johnmarsden/PratherTA/P1CSharpPrograms/HowMuchTime/bin/Debug/netcoreapp3.0/HowMuchTime.deps.json
+/home/johnmarsden/PratherTA/P1CSharpPrograms/HowMuchTime/bin/Debug/netcoreapp3.0/HowMuchTime.runtimeconfig.json
+/home/johnmarsden/PratherTA/P1CSharpPrograms/HowMuchTime/bin/Debug/netcoreapp3.0/HowMuchTime.runtimeconfig.dev.json
+/home/johnmarsden/PratherTA/P1CSharpPrograms/HowMuchTime/bin/Debug/netcoreapp3.0/HowMuchTime.dll
+/home/johnmarsden/PratherTA/P1CSharpPrograms/HowMuchTime/bin/Debug/netcoreapp3.0/HowMuchTime.pdb
+/home/johnmarsden/PratherTA/P1CSharpPrograms/HowMuchTime/obj/Debug/netcoreapp3.0/HowMuchTime.dll
+/home/johnmarsden/PratherTA/P1CSharpPrograms/HowMuchTime/obj/Debug/netcoreapp3.0/HowMuchTime.pdb

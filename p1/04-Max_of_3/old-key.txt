@@ -1,0 +1,107 @@
+<?php
+
+// Include this at the beginning of every scoring key, 
+// with updated numbers for the specific number of tests in each function for that problem
+$attempt->queue_tests(array(
+	"Compile"   => 1,  
+	"Given"     => 2,
+	"Format"    => 1,
+	"Standard"  => 5, 
+	"Random"    => 20, 
+	"Edge"      => 2,
+	"All"       => 30));
+	//the number of tests to be run in each PHP function.
+
+// test_Compile ensures that the source code compiles without error	
+// This will probably be exactly the same for every problem
+function test_Compile($i) {
+	global $attempt;
+	//check and see if it compiles
+	return compile($attempt->compiler.$attempt->filename); 
+}
+
+// test_Given checks that the program runs correctly for the examples given in the problem statement;
+// check formatting (header line, spacing, etc.) as little as possible
+function test_Given($i) {
+	$in  = array("2\n4\n1\n", "7\n2\n3\n");
+	$out = array("4", "7");
+	return run("./a.out",$in[$i]) && output_contains("is $out[$i]");
+	
+	//run the given test cases, one at a time
+	//
+	//pass the compiled file and one test case ($in[$i])
+	//assume that $attempt->queue_tests loops these tests based on the integer next to the testname
+}
+
+// test_Format again checks using the some of the sample data from the problem statement, 
+// but also checks all formatting
+function test_Format($i) {
+	return run("./a.out","2\n4\n1\n") && output_contains_lines(<<<END
+This program identifies the largest of three numbers.
+
+Enter integer: <span class=input>2</span>
+Enter integer: <span class=input>4</span>
+Enter integer: <span class=input>1</span>
+
+The largest number is 4.
+END
+	);
+}
+               
+function test_Standard($i) {
+	$in = array(
+		"5\n6\n7\n",
+		"-9\n5\n0\n",
+		"8\n3\n8\n",
+		"7\n5\n6\n",
+		"53\n16\n41\n");
+	$out = array(7,5,8,7,53);
+	
+	//create two arrays
+	//run $in through the program, and then check if it matches $out
+
+	return run("./a.out",$in[$i]) 
+		&& output_contains("The largest number is $out[$i]");
+}
+
+function test_Random($i) {
+	$case = "";
+   	$mx = -1;
+   	for ($s=0; $s<3; $s++) {
+   		$rnd = rand(0,99);
+		$mx = max($mx, $rnd);
+      	$case .= strval($rnd)."\n";
+   	}
+		
+   	return run("./a.out",$case) && output_contains("The largest number is $mx");
+   	
+   	//creates between 3 random numbers, finds the largest, and runs those numbers through the program.
+   	//output should match the largest random number	
+}
+
+function test_Edge($i) {
+	global $attempt;
+	$attempt->hint = "What if all the numbers are negative?";
+	
+	$in = array(
+		"-2\n-5\n-8\n", //negative
+		"0\n0\n0\n");  	//all equal
+	$out = array(-2,0);
+	
+	return run("./a.out",$in[$i]) && output_contains("The largest number is $out[$i]"); 
+}
+
+function test_All($i) {
+	$case = "";
+   	$mx = -999999;
+   	for ($s=0; $s<3; $s++) {
+   		$rnd = rand(-999999,999999);
+		$mx = max($mx, $rnd);
+      	$case .= strval($rnd)."\n"; 
+   	}
+	return run("./a.out",$case) && output_contains("The largest number is $mx");
+   	
+   	//creates 3 random numbers between -999999 and 999999 and finds the largest.
+   	//then, it runs them through the program and compares output with the known maximum.
+}
+

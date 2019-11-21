@@ -1,0 +1,14 @@
+[manifest:default]
+name="Indexer Test Cases"
+upload[]=Zip
+available[]=../auto_score.php
+available[]=score.php
+available[]=book-index.cpp
+viewable[]=book-spec.html
+
+[verify-score]
+small.zip=1.0
+minimum.zip=0.04
+incomplete.zip=0.78     ; 0.68 ??
+more.zip=1.0            ; 0.94 ??
+complete.zip=1.00

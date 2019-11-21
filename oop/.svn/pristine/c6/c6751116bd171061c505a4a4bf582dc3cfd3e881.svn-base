@@ -1,0 +1,22 @@
+[manifest:default]
+name="Shape Groups"
+upload[]=Header
+upload[]=Code
+available[]=../oop_scoring.php
+available[]=../new.cpp
+available[]=score.php
+available[]=empty.cpp
+available[]=all.cpp
+available[]=sample.cpp
+available[]=polymorphism.cpp
+available[]=colors.cpp
+
+[verify-score]
+correct/Shapes.h,correct/Shapes.cpp = 1.0
+deallocation_error/Shapes.h,deallocation_error/Shapes.cpp = 0.25
+recursive_groups/Shapes.h,recursive_groups/Shapes.cpp = 0.25
+value_semantics/Shapes.h,value_semantics/Shapes.cpp = 0.95
+compile_error/Shapes.h,compile_error/Shapes.cpp = 0.01
+colorpoint_error/Shapes.h,colorpoint_error/Shapes.cpp = 0.95
+
+; TODO -- other error checking

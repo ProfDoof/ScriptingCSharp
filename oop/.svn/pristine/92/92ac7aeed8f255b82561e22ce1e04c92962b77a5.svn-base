@@ -1,0 +1,56 @@
+<p>The purpose of this assignment is to practice C++ class implementation 
+allowing value semantics for a simple class: IntegerSet, an unordered 
+container of int values.</p>
+
+<p>In addition to the previous container requirements, your class should 
+provide all functionality required to allow an instance of IntegerSet to be 
+used as a value-type. That is, instances (values) should be copyable, 
+assignable, passable, initializable, and displayable as if they were a value 
+of a built-in type just like an int. 
+
+<p>In addition to canonical form, your code should allow values of type 
+IntegerSet to be formatted and output using iostream; again, this is just like 
+values for ints.</p>
+
+<p>The following code is a partial example of how your class will be tested.      
+
+<pre class=file>
+IntegerSet unionize(IntegerSet a,IntegerSet b)
+{
+    IntegerSet result = a;
+    for (int i=0; i&lt;1000000; i++)
+        if (b.contains(i))
+            result.insert(i);
+    return result;
+}
+
+void print(IntegerSet *a,int n);
+
+int main()
+{
+    int odds[] = {1,3,5,7,9,11,13,15,17,19};
+    int primes[100] = {2,3,5,7,11,13,17,19};
+ 
+    IntegerSet s;
+    IntegerSet p(primes,8);
+    IntegerSet n(p);
+    IntegerSet m = p;
+    IntegerSet a[10];
+ 
+    for (int i=0; i&lt;10; i++)
+        for (int j=0; j&lt;i; j++)
+            a[i].insert(j);
+ 
+    s = a[9];
+    a[7] = IntegerSet();
+    a[8] = IntegerSet(odds,10);
+ 
+    IntegerSet b[8] = {s,p,a[1],a[3],IntegerSet(odds,8)};
+ 
+    cout &lt;&lt; s &lt;&lt; " " &lt;&lt; n &lt;&lt; endl;
+    cout &lt;&lt; p &lt;&lt; " " &lt;&lt; n &lt;&lt; endl;
+ 
+    print(a,10);
+    print(b,8);
+}
+</pre>

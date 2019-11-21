@@ -1,0 +1,101 @@
+<?php
+
+// Include this at the beginning of every scoring key, 
+// with updated numbers for the specific number of tests in each function for that problem
+$attempt->queue_tests(array(
+	"Compile"   => 1,  
+	"Given"     => 2,
+	"Format"    => 1,
+	"Standard"  => 5, 
+	"Random"    => 20, 
+	"Edge"      => 3,
+	"All"       => 30));
+	//the number of tests to be run in each PHP function.
+
+// test_Compile ensures that the source code compiles without error	
+// This will probably be exactly the same for every problem
+function test_Compile($i) {
+	global $attempt;
+	//check and see if it compiles
+	return compile($attempt->compiler.$attempt->filename)
+			&& source_does_not_contain_regex("/for\s*\(/","for loop") 
+			&& source_does_not_contain_regex("/while\s*\(/","for loop");  
+}
+
+// test_Given checks that the program runs correctly for the examples given in the problem statement;
+// check formatting (header line, spacing, etc.) as little as possible
+function test_Given($i) {
+	$in  = array("2\n2\n", "3\n2\n");
+	$out = array(7, 29);
+	return run("./a.out",$in[$i]) && output_contains("$out[$i]");	
+}
+
+// test_Format again checks using the some of the sample data from the problem statement, 
+// but also checks all formatting
+function test_Format($i) {
+	return run("./a.out","3\n2\n") && output_contains_lines(<<<END
+* Ackermann function *
+Enter m: <span class=input>3</span>
+Enter n: <span class=input>2</span>
+
+Ackermann(3,2) = 29
+END
+	);
+}
+               
+function test_Standard($i) {
+	$in = array(
+		"1\n2\n",
+		"2\n512\n",
+		"3\n3\n",
+		"3\n5\n",
+		"1\n1\n");
+	$out = array(4,1027,61,253,3);
+	
+	return run("./a.out",$in[$i]) 
+		&& output_contains("$out[$i]\n"); 
+	
+}
+
+function ackermann($m, $n)
+{
+	if( $m == 0 )
+		return $n+1;
+	if( $n == 0 )
+		return ackermann($m-1,1);
+	return ackermann($m-1,ackermann($m,$n-1));
+}
+
+function test_Random($i) {
+	$m = rand(1,3); //choose base number
+	$n = rand(1,8); //choose power
+	$case = "$m\n$n\n";
+	$ans  = ackermann($m, $n);
+	   			
+   	return run("./a.out",$case) && output_contains("$ans");
+   	
+   	//creates random numbers, finds the answer, and runs those numbers through the program.   	
+}
+
+function test_Edge($i) {
+	$in = array(
+		"0\n0\n",	//base case
+		"0\n5\n",  	//m = 0
+		"3\n0\n");	//n = 0
+	$out = array(1,6,5);
+	
+	return run("./a.out",$in[$i]) && output_contains("$out[$i]"); 
+}
+
+function test_All($i) {
+	$m = rand(0,3); //choose base number
+	$n = rand(0,8); //choose power
+	$case = "$m\n$n\n";
+	$ans  = ackermann($m, $n);
+	   			
+   	return run("./a.out",$case) && output_contains("$ans");
+   	
+   	//creates random numbers, finds the answer, and runs those numbers through the program.		
+}
+
+

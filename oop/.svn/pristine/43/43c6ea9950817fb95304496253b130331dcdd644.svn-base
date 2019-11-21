@@ -1,0 +1,15 @@
+[manifest:default]
+name="Set"
+upload[]=Header
+available[]=../auto_score.php
+available[]=../new.cpp
+available[]=score.php
+available[]=test.cpp
+available[]=sample.cpp
+
+; TODO -- problem.html
+
+[verify-score]
+compile_error/IntegerSet.h,compile_error/IntegerSet.cpp=0.0
+correct/IntegerSet.h,correct/IntegerSet.cpp=1.0
+; TODO -- other error checking

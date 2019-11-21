@@ -1,0 +1,17 @@
+[manifest:default]
+name="Integer Queue" 
+upload[]=Header
+upload[]=Code
+available[]=../auto_score.php
+available[]=../new.cpp
+available[]=score.php
+available[]=skeleton.cpp
+max-attempts=3
+attempts-window=120
+
+[verify-score]
+compile_error/IntegerQueue.h,compile_error/IntegerQueue.cpp=0.05
+include_error/IntegerQueue.h,include_error/IntegerQueue.cpp=0.10
+memory_leak/IntegerQueue.h,memory_leak/IntegerQueue.cpp=0.20
+correct/IntegerQueue.h,correct/IntegerQueue.cpp=1.0
+not_const/IntegerQueue.h,not_const/IntegerQueue.cpp=1.0

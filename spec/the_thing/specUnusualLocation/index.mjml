@@ -1,0 +1,45 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-text align="center" color="#555" /> </mj-attributes>
+  </mj-head>
+  <mj-body background-color="#ffffff">
+    <mj-wrapper border="1px solid #461d7c" padding="0px" css-class="">	
+      <mj-include path="./header.mjml" />
+      <mj-section background-color="#ffffff" padding="0px 12px 12px 12px">
+        <mj-column background-color="#ededff" border="1px solid black">
+          <mj-text color="black" align="left"> Dear {{.FirstName}} {{.LastName}}, </mj-text>
+          <mj-text color="black" align="left"> We have detected a sign in attempt to your student account from an unusual location. In order to ensure the security of your account, click the following link to continue to your account verification.</mj-text>
+          <mj-button background-color="#461d7c" href="{{.URL}}">
+          Verify Account</mj-button>
+          <mj-text color="black" align="left"> Thank you for your understanding, </mj-text>
+          <mj-text color="black" align="left"> Abilene Christian IT </mj-text>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+  </mj-body>
+</mjml>
+
+
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-text align="center" color="#555" /> </mj-attributes>
+  </mj-head>
+  <mj-body background-color="white">
+    <mj-wrapper border=>	
+      <mj-include path="./header.mjml" />
+      <mj-section>
+        <mj-column background-color="white">
+          <mj-text color="black" align="left" font-family="divot">	 Dear {{.FirstName}} {{.LastName}}, </mj-text>
+          <mj-text color="black" align="left"  font-family="divot">  We have detected a sign in attempt to your student account from an unusual location. In order to ensure the security of your account, click the following link to continue to your account verification. </mj-text>
+          <mj-button border="2px solid #461d7c" background-color="white" color="#461d7c" href="{{.URL}}"  font-family="divot">
+          <b>    Verify Mailbox  </b></mj-but></mj-button>
+          
+          <mj-text color="black" align="left" font-family="divot" >Thank you for your understanding,  </mj-text>
+          <mj-text color="black" align="left"  font-family="divot"> Abilene Christian IT </mj-text>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+  </mj-body>
+</mjml>

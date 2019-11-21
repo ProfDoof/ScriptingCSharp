@@ -1,0 +1,79 @@
+<p>If you have ever parked at an airport, you have probably noticed that airports
+typically have complicated rules for determining the cost of parking.
+Here is a sample pricing schedule, taken from a real airport.</p>
+
+<p><strong>Pricing</strong></p>
+<table cellpadding="5" cellspacing="0" border="0" id="table_inside2">
+<tr>
+<th>Time</th>
+<th> Cost</th>
+</tr>
+<tr>
+<td align="left" valign="top">First 30 minutes</td>
+<td align="center" valign="top">FREE</td>
+</tr>
+<tr>
+<td align="left" valign="top">31 to 60 minutes</td>
+<td align="center" valign="top">$2.00</td>
+</tr>
+<tr>
+<td align="left" valign="top">Each additional 30 minutes</td>
+<td align="center" valign="top">$1.00</td>
+</tr>
+<tr>
+<td align="left" valign="top">Up to seven hours</td>
+<td align="center" valign="top">$14.00</td>
+</tr>
+<tr>
+<td align="left" valign="top">Thereafter, each hour</td>
+<td align="center" valign="top">$1.00</td>
+</tr>
+<tr>
+<td align="left" valign="top">24-hour maximum</td>
+<td align="center" valign="top">$21.00</td>
+</tr>
+</table>
+
+<p>Create a program to input a time (in minutes) that a car has been parked
+and then display the cost of parking, according to the pricing scheduled shown above.
+</p>
+
+<p>
+As noted above, this pricing is from a real airport and the presentation is unclear.
+Please note that "each additional 30 minutes" 
+means each block of <i>up to</i> 30 minutes, so 65 minutes costs $3 (1 hour + 1 30-minute period).
+Each hour after the first seven adds $1 to the cost, 
+but the total cost will not exceed $21 for any time within 24 hours.
+This program will not be tested with times exceeding 24 hours.
+</p>
+
+<pre class=cmd>
+Enter parking duration (in minutes): <span class=input>15</span>
+
+Parking cost = $0
+</pre>
+
+<pre class=cmd>
+Enter parking duration (in minutes): <span class=input>60</span>
+
+Parking cost = $2
+</pre>
+
+<pre class=cmd>
+Enter parking duration (in minutes): <span class=input>65</span>
+
+Parking cost = $3
+</pre>
+
+<pre class=cmd>
+Enter parking duration (in minutes): <span class=input>320</span>
+
+Parking cost = $11
+</pre>
+
+<pre class=cmd>
+Enter parking duration (in minutes): <span class=input>1000</span>
+
+Parking cost = $21
+</pre>
+

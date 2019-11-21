@@ -1,0 +1,93 @@
+<?php
+
+// Include this at the beginning of every scoring key, 
+// with updated numbers for the specific number of tests in each function for that problem
+$attempt->queue_tests(array(
+	"Compile"   => 1,  
+	"Given"     => 0,
+	"Format"    => 1,
+	"Standard"  => 8, 
+	"Random"    => 0, 
+	"Edge"      => 0,
+	"All"       => 0));
+	//the number of tests to be run in each PHP function.
+
+// test_Compile ensures that the source code compiles without error	
+// This will probably be exactly the same for every problem
+function test_Compile($i) {
+	global $attempt;
+	//check and see if it compiles
+	return compile($attempt->compiler.$attempt->filename); 
+}
+
+// test_Given checks that the program runs correctly for the examples given in the problem statement;
+// check formatting (header line, spacing, etc.) as little as possible
+function test_Given($i) {
+
+}
+
+// test_Format again checks using the some of the sample data from the problem statement, 
+// but also checks all formatting
+
+function test_Format($i) {
+	// Formatting not really relevant in this assignment
+	return true;
+}
+               
+function test_Standard($i) {
+	global $attempt;
+	
+	$in = array(
+		"2.0\n2.0\n4.0\n",
+		"1\n1\n1\n",
+		"3\n4\n5\n",
+		"5\n4\n3\n",
+		"4\n5\n3\n",
+		"5.2\n8.3\n7.6\n",
+		"3\n5\n6\n",
+		"10.5\n10.5\n10\n");
+		
+	$hint = array("Make sure that a proper triangle can be formed from three lengths.",
+						 "Check for equilateral triangles first.",
+						 "A right triangle is not an acute scalene triangle.",
+						 "A 3, 4, 5 triangle is the same as a 5, 4, 3 triangle.",
+						 "A 4, 5, 3 triangle is the same as a 5, 4, 3 triangle.",
+						 "Don't forget to test for scalene triangles.",
+						 "",
+						 "");
+	
+	$out = array("Those lengths do not form a triangle.", 
+						"This is an equilateral triangle.",
+						"This is a right triangle.",
+						"This is a right triangle.", 
+						"This is a right triangle.",
+						"This is an acute scalene triangle.",
+						"This is an obtuse scalene triangle.",
+						"This is an isosceles triangle");
+	
+	$not = array("This is an isosceles triangle.", 
+						"This is an isosceles triangle.",
+						"This is an acute scalene triangle.",
+						"This is an acute scalene triangle.",
+						"This is an acute scalene triangle.",
+						"This is an obtuse scalene triangle.",
+						"This is an acute scalene triangle.",
+						"This is a scalene triangle.");
+	$attempt->hint = $hint[$i];
+	return run("./a.out",$in[$i]) 
+		&& output_contains("$out[$i]")
+		&& output_does_not_contain("$not[$i]"); 
+	
+}
+
+function test_Random($i) {
+
+}
+
+function test_Edge($i) {
+//none
+}
+
+function test_All($i) {
+
+}

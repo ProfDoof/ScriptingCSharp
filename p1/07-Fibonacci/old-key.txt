@@ -1,0 +1,92 @@
+<?php
+
+// Include this at the beginning of every scoring key, 
+// with updated numbers for the specific number of tests in each function for that problem
+$attempt->queue_tests(array(
+	"Compile"   => 1,  
+	"Given"     => 2,
+	"Format"    => 1,
+	"Standard"  => 5, 
+	"Random"    => 20, 
+	"Edge"      => 1,
+	"All"       => 30));
+	//the number of tests to be run in each PHP function.
+
+// test_Compile ensures that the source code compiles without error	
+// This will probably be exactly the same for every problem
+function test_Compile($i) {
+	global $attempt;
+	//check and see if it compiles
+	return compile($attempt->compiler.$attempt->filename)
+			&& source_does_not_contain_regex("/for\s*\(/","for loop")
+			&& source_does_not_contain_regex("/while\s*\(/","for loop"); 
+}
+
+// test_Given checks that the program runs correctly for the examples given in the problem statement;
+// check formatting (header line, spacing, etc.) as little as possible
+function test_Given($i) {
+	$in  = array("0\n", "7\n");
+	$out = array("0", "13");
+	return run("./a.out",$in[$i]) && output_contains("$out[$i]");
+	
+	
+}
+
+// test_Format again checks using the some of the sample data from the problem statement, 
+// but also checks all formatting
+
+function test_Format($i) {
+	global $attempt;
+	$attempt->hint = "Note the newline at the end of the program.";
+	
+	return run("./a.out","4\n") && output_contains_lines(<<<END
+This program calculates numbers in the Fibonacci sequence.
+Which place in the sequence do you want to calculate? <span class=input>4</span>
+
+Fibonacci(4) is 3
+
+END
+	);
+}
+               
+function test_Standard($i) {
+	$in = array(
+		"3",
+		"6",
+		"5",
+		"9",
+		"4");
+	$out = array(2,8,5,34,3);
+	
+	return run("./a.out",$in[$i]) 
+		&& output_contains("$out[$i]"); 
+	
+}
+
+function find_Fib($n) {
+	if ($n <= 1)
+		return $n;
+	
+	return find_Fib($n - 1) + find_Fib($n - 2);
+}
+
+function test_Random($i) {
+	$n = rand(3, 20);
+	$ans = find_Fib($n);
+	
+	return run("./a.out",$n) && output_contains("$ans");
+}
+
+function test_Edge($i) {
+	$in = 2; //check to see if base works (there's not really a edge case for this problem)
+	$out = 1;
+	
+	return run("./a.out",$in) && output_contains("$out"); 
+}
+
+function test_All($i) {
+	$n = rand(0, 25);
+	$ans = find_Fib($n);
+	
+	return run("./a.out",$n) && output_contains("$ans");  	
+}
