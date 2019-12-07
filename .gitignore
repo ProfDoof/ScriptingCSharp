@@ -2,3 +2,9 @@ oop
 p1
 ./oop/*
 ./p1/*
+spec/studylist.csv
+spec/studylist.ods
+spec/testList.csv
+spec/templateSend.py
+spec/test.py
+spec/cronlog.txt
