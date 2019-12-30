@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 
 namespace AddTwoIntegers
 {
     class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             int firstValue, secondValue;
 
